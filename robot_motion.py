@@ -42,14 +42,11 @@ def move_inline(speed,distance,is_forward):
     velocity_msgs.linear.x=0
     velocity_publisher.publish(velocity_msgs)
 
-def rotate():
+def rotating(angular_speed_degree,relative_degree,clockwise):
     velocity_msgs=Twist()
-    rospy.init_node('turtlesim_node',anonymous=True)
+    #rospy.init_node('turtlesim_node',anonymous=True)
     velocity_publisher=rospy.Publisher('/turtle1/cmd_vel',Twist,queue_size=10)
-    print("GIVE YOUR INPUT")
-    angular_speed_degree=float(input("ENTER THE SPEED OF ROTATION"))
-    relative_degree=float(input("ENTER THE DEGREE OF ROTATION"))
-    clockwise=input("CLOCKWISE:?")
+    
 
     angular_speed=math.radians(abs(angular_speed_degree))
 
@@ -179,6 +176,39 @@ def spiralmotion():
     velocity_msgs.linear.x=0
     velocity_msgs.angular.z=0
     velocity_publisher.publish(velocity_msgs)
+    
+def square():
+    for i in range(4):
+        moving_straight(1.0,2.0,True)
+        rotating(5.0,1.57,True)
+        '''moving_straight(1.0,2.0,True)
+        rotating(5.0,1.57,True)
+        moving_straight(1.0,2.0,True)
+        rotating(5.0,1.57,True)
+        moving_straight(1.0,2.0,True)
+        rotating(5.0,1.57,True)'''
+    rospy.loginfo("SQUARE FINISHED")
+def rectangle():
+    for i in range(2):
+        moving_straight(1.0,4.0,True)
+        rotating(5.0,math.pi/2,True)
+        moving_straight(1.0,2.0,True)
+        rotating(5.0,math.pi/2,True)
+        '''moving_straight(1.0,2.0,True)
+        rotating(5.0,1.57,True)
+        moving_straight(1.0,2.0,True)
+        rotating(5.0,1.57,True)'''
+    rospy.loginfo("SQUARE FINISHED")
+
+def triangle():
+    for i in range(3):
+        moving_straight(1.0,3.0,True)
+        rotating(6.0,math.radians(120),False)
+def star():
+    for i in range(5):
+        moving_straight(1.0,3.0,True)
+        rotating(6.0,math.radians(144),False)
+
 
     
 def callback(pose_message):
